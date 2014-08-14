@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+
+    <script src="lib/jquery-2.1.1/jquery-2.1.1.min.js"></script>
+    <script type="text/javaScript" src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/lodash-2.4.1/lodash.compat.js"></script>
+
+    <script type="text/javaScript" src="js/main.js"></script>
+    <script type="text/javaScript" src="js/model/item.js"></script>
+</head>
+<body>
+  <div class=container>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" ><a href="index.html"><span class="glyphicon glyphicon-home"></span>主页</a></li>
+        <li role="presentation"><a href="shoppingmall.html">商城</a></li>
+        <ul class="nav navbar-nav navbar-right">
+            <li><span class="glyphicon glyphicon-shopping-cart"><a href="#">我的购物车()</a></span></li>
+        </ul>
+    </ul>
+  </div>
+  <div >
+      <div class="panel">
+          <!--<div class="panel-heading"><h3>水果：</h3></div>-->
+          <div class="panel-body">
+              <ul class="list-group">
+                  <li class="list-group-item list-group-item-info">
+                      <div class="row">
+                          <div class="col-md-3">苹果：</div>
+                          <div class="col-md-3">5.00&nbsp;&nbsp;元&nbsp;/&nbsp;斤</div>
+                          <div class="col-md-3">
+                              <button>+</button>
+                              <input type="text"value="1">
+                              <button>-</button>
+                          </div>
+                          <div class="col-md-3">小计：1.00元</div>
+                      </div>
+                  </li>
+                  <li class="list-group-item list-group-item-warning">
+                      <div class="row">
+                          <div class="col-md-3"> 香蕉：</div>
+                          <div class="col-md-3">5.50&nbsp;&nbsp;元&nbsp;/&nbsp;斤</div>
+                          <div class="col-md-3">
+                              <button>+</button>
+                              <input type="text"value="1">
+                              <button>-</button>
+                           </div>
+                      <div class="col-md-3">小计：1.00元</div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-danger">
+                      <div class="row">
+                          <div class="col-md-3">菠萝：</div>
+                          <div class="col-md-3">6.00&nbsp;&nbsp;元&nbsp;/&nbsp;个</div>
+                          <div class="col-md-3">
+                          <button>+</button>
+                            <input type="text"value="1">
+                           <button>-</button>
+                          </div>
+                          <div class="col-md-3">小计：1.00元</div>
+                      </div>
+                  </li>
+              </ul>
+              <!--<div class="list-group">-->
+                  <!--<a href="#" class="list-group-item list-group-item-info">-->
+                      <!--<div class="row">-->
+                          <!--<div class="col-md-3"> 雪碧：</div>-->
+                          <!--<div class="col-md-3">3.00&nbsp;&nbsp;元&nbsp;/&nbsp;瓶</div>-->
+                          <!--<div class="col-md-3">-->
+                              <!--<button>+</button>-->
+                              <!--<input type="text"value="1">-->
+                              <!--<button>-</button>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-3">小计：1.00元</div>-->
+                      <!--</div>-->
+                  <!--</a>-->
+                  <!--<a href="#" class="list-group-item list-group-item-warning">-->
+                      <!--<div class="row">-->
+                          <!--<div class="col-md-3"> 可乐：</div>-->
+                          <!--<div class="col-md-3">3.00&nbsp;&nbsp;元&nbsp;/&nbsp;瓶</div>-->
+                          <!--<div class="col-md-3">-->
+                              <!--<button>+</button>-->
+                              <!--<input type="text"value="1">-->
+                              <!--<button>-</button>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-3">小计：1.00元</div>-->
+                      <!--</div>-->
+                  <!--</a>-->
+              <!--</div>-->
+          </div>
+      </div>
+    </div>
+   </div>
+  </div>
+      <p class="text-center">总计：1.00元</p><br>
+      <p class="text-center"><a class="btn btn-primary btn-lg" role="button"href="pay.html">去结算</a></p>
+  </div>
+</body>
+</html>
