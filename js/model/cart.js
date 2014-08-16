@@ -60,22 +60,23 @@ function showCartList(){
         if (judgeCategory(cartProduct.items.category)) {
             categories.push(cartProduct.items.category);
             $('#cartList').append('<div class="panel panel-warning">' + '<div class="panel-heading">' +
-                '<div class="row text-center">' + '<div class="col-md-2">'+cartProduct.items.category+'</div>' +
-                '<div class="col-md-2">单价</div>' + '<div class="col-md-2">单位</div>' +
+                '<div class="row text-center">' + '<div class="col-md-2">'+cartProduct.items.category+
+                '</div>' + '<div class="col-md-2">单价</div>' + '<div class="col-md-2">单位</div>' +
                 '<div class="col-md-3">数量</div>' + '<div class="col-md-2">移出购物车</div>' +
-                '<div class="col-md-1">小计</div>' + '</div>' + '</div>' +
-                '<div class="panel-body">' + '<div class="row text-center" id="' + cartProduct.items.category + '">' +
-                '<div class="col-md-2">' + cartProduct.items.name + '</div>' + '<div class="col-md-2">' + cartProduct.items.price + '</div>' +
-                '<div class="col-md-2">' + cartProduct.items.unit + '</div>' +
-                '<div class="col-md-3 form-inline form-group">' +
+                '<div class="col-md-1">小计</div>' + '</div>' + '</div>' + '<div class="panel-body">' +
+                '<div class="row text-center" id="' + cartProduct.items.category + '">' +
+                '<div class="col-md-2">' + cartProduct.items.name + '</div>' + '<div class="col-md-2">' +
+                cartProduct.items.price + '</div>' + '<div class="col-md-2">' + cartProduct.items.unit +
+                '</div>' + '<div class="col-md-3 form-inline form-group">' +
                 '<button>+</button>' + '<input type="text" value="1">' + '<button>-</button>' +
                 '</div>' + '<div class="col-md-2">' + '<button>移除</button>' + '</div>' +
-                '<div class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount + '元' + '</div>' + '</div>' + '</div>' + '</div>');
+                '<div class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount + '元' +
+                '</div>' + '</div>' + '</div>' + '</div>');
         }
         else {
             $('#'+cartProduct.items.category+'').append(
-                '<div class="row text-center"></div>'+
-                '<div class="col-md-2">' + cartProduct.items.name + '</div>' + '<div class="col-md-2">' + cartProduct.items.price + '</div>' +
+                '<div class="row text-center"></div>'+ '<div class="col-md-2">' + cartProduct.items.name +
+                '</div>' + '<div class="col-md-2">' + cartProduct.items.price + '</div>' +
                 '<div class="col-md-2">' + cartProduct.items.unit + '</div>' +
                 '<div class="col-md-3 form-inline form-group">' +
                 '<button>+</button>' + '<input type="text" value="1">' + '<button>-</button>' +
