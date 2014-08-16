@@ -2,16 +2,16 @@ function CartItems(items,inputCount){
 
     this.items = items;
     this.inputCount = inputCount;
-    this.subtotal = 0;
-    this.total = 0;
+//    this.subtotal = this.items.price * this.inputCount;
 }
-//
-//CartItems.prototype.getSubtotal = function(){
-//
-//    this.subtotal = this.inputCount*this.items.price;
-//    return this.subtotal;
-//};
-////
+
+CartItems.prototype.getSubtotal = function(){
+
+    var subtotal = this.inputCount * this.items.price;
+    return subtotal;
+};
+
+
 ////CartItems.prototype.total = function(){
 ////
 ////    _.forEach(this.subtotal,function(this.subtotal){
