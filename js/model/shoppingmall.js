@@ -10,8 +10,10 @@ $(document).ready(function(){
 //        console.log($(this)[0].id);
        addCart($(this)[0].id);
         cartSum++;
-        $('#cartItemSum').text(cartSum);
+        localStorage.setItem('cartSum',JSON.stringify(cartSum));
+        var cartSums = JSON.parse(localStorage.getItem('cartSum'));
 
+        $('#cartItemSum').text(cartSums);
     });
 
 });

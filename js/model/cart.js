@@ -5,6 +5,18 @@
 //$(document).ready(function(){
 //   $('#cartItemSum').text('cartSum');
 //})
+
+$(document).ready(function(){
+
+
+        var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+
+        $('#cartItemSum').text(cartSums);
+
+
+});
+
+
 function addCart(barcode){
 
     var cartProduct = JSON.parse(localStorage.getItem('cartProduct'));
@@ -20,7 +32,6 @@ function addCart(barcode){
         }
     }
     localStorage.setItem('cartProduct',JSON.stringify(cartProduct));
-    
 }
 
 function  judgeIsExist(cartProduct,barcode){

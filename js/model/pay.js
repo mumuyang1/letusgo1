@@ -1,9 +1,14 @@
 /**
  * Created by liyanzi on 14-8-16.
  */
-function showPayList(){
+$(document).ready(function(){
+        var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+        $('#cartItemSum').text(cartSums);
+});
 
-    print='';
-    print+=';'
-
-}
+//function showPayList(){
+//
+//    print='';
+//    print+=';'
+//
+//}

@@ -1,3 +1,9 @@
+
+$(document).ready(function(){
+        var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+        $('#cartItemSum').text(cartSums);
+});
+
 function getItems(){
 
     var allItems =  [
