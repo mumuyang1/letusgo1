@@ -1,15 +1,11 @@
 /**
  * Created by liyanzi on 14-8-15.
  */
-
-//$(document).ready(function(){
-//   $('#cartItemSum').text('cartSum');
-//})
-
 $(document).ready(function(){
 
         var cartSums = JSON.parse(localStorage.getItem('cartSum'));
         $('#cartItemSum').text(cartSums);
+        showCartList();
 });
 
 function addCart(barcode){
@@ -20,7 +16,6 @@ function addCart(barcode){
     if(!cartProduct){
          cartProduct = [];
          cartProduct.push(cartItem);
-         //cartProduct.getSubtotal();
     }
     else{
         if(!judgeIsExist(cartProduct,barcode)){
@@ -28,7 +23,7 @@ function addCart(barcode){
         }
     }
     localStorage.setItem('cartProduct',JSON.stringify(cartProduct));
-    getTotal(cartProduct);
+//    console.log(getTotal(cartProduct)+'=======');
 }
 
 function  judgeIsExist(cartProduct,barcode){
@@ -54,17 +49,12 @@ function  getCartItemByBarcode(barcode){
      }
 }
 
-function getTotal(cartProduct){
-
-    var total = 0;
-
-    _.forEach(cartProduct,function(cartProduct){
-
-        var item = new CartItems(cartProduct.items,cartProduct.inputCount);
-        total += item.getSubtotal();
-//        console.log(item.getSubtotal()+"-------------------------------");
-
-    });
-    console.log(total+"-------------------------------");
-
-}
+//function getTotal(cartProduct){
+//
+//    var total = 0;
+//    _.forEach(cartProduct,function(cartProduct){
+//
+//        var item = new CartItems(cartProduct.items,cartProduct.inputCount);
+//        total += item.getSubtotal();
+//    });
+//}
