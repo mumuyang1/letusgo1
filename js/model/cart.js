@@ -115,10 +115,14 @@ function showCartList(){
                     '<button class="reduceButton">-</button></div>' +
                     '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode + '"class="deleteButton">移除</button></div>' +
                     '<div id="' + 'button' + cartProduct.items.barcode + '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount +
-                    '元</div></div>');
+                    '元'+'</div></div>');
             }
+
         }
         });
+//        if(cartProduct.length == 0){
+//            $('#cartItemBottom').append('<p class="text-center">购物车里木有东西了！快去商城看看！</p><br>');
+//        }
         $('#cartItemBottom').append('<p id="total" class="text-center">总计：'+getTotal(cartProduct)+'元</p>'+
             '<p class="text-center"><a class="btn btn-primary btn-lg" role="button" href="pay.html">去结算>></a></p>');
 }

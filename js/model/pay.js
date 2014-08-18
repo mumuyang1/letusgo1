@@ -42,10 +42,6 @@ function showPayList(){
                 '<div class="col-md-3 text-center">' + cartProduct.items.price + '元' + '</div>' +
                 '<div class="col-md-3 text-center">' + cartProduct.items.price * cartProduct.inputCount + '元</div>');
               }
-            else {
-                $('#payList').append('<div class="text-center text-success"><h3>空空如也，去商场转转！</h3></div>');
-
-            }
         });
         $('#payList2').append('<div class="text-center text-info"><h4>总计：' + getTotal(cartProduct) +
             '元</h4></div>' + '<div class="text-center">打印时间：2014年8月3日</div>' +
