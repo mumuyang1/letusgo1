@@ -20,15 +20,15 @@ $(document).ready(function(){
         getNewMoney();
     });
 
-//    $('.deleteButton').on('click',function(){
-////        console.log( $(this).closest('.form-group').find('.col-md-3').find('.inputNum'));
-////        var id = $(this).closest('.form-group').find('.col-md-3').find('.inputNum')[0];
-//   //     var id = $(this).closest('.form-group').find('.inputNum')[0].id;
-//        var id = $(this).closest('.addButton').closest('.form-group').find('.inputNum')[0].id;
-//        deleteButton(id);
-//        getNewMoney();
-//
-//    });
+    $('.deleteButton').on('click',function(){
+//        console.log($(this)[0].id);
+//        console.log($(this).closest('.row')+"--------------------");
+
+        var id = $(this).closest('.row').find('input')[0].id;
+        deleteButton(id);
+        getNewMoney();
+
+    });
 
     getSum();
 });
@@ -78,44 +78,46 @@ function showCartList(){
     var cartProduct = JSON.parse(localStorage.getItem('cartProduct'));
 
     _.forEach(cartProduct, function (cartProduct){
-        if (judgeCategory(cartProduct.items.category)) {
-            categories.push(cartProduct.items.category);
-            $('#cartList').append('<div class="panel panel-warning"><div class="panel-heading">' +
-                '<div class="row text-center">' +
-                '<div class="col-md-2">'+cartProduct.items.category +'</div>' +
-                '<div class="col-md-2">单价</div>' +
-                '<div class="col-md-2">单位</div>' +
-                '<div class="col-md-3">数量</div>' +
-                '<div class="col-md-2">移出购物车</div>' +
-                '<div class="col-md-1">小计</div>' +
-                '</div></div>' +
-                '<div class="panel-body">' +
-                '<div class="row text-center" id="' + cartProduct.items.category + '">' +
-                '<div class="col-md-2 form-group">' + cartProduct.items.name + '</div>' +
-                '<div class="col-md-2 form-group">' + cartProduct.items.price + '</div>' +
-                '<div class="col-md-2 form-group">' + cartProduct.items.unit + '</div>' +
-                '<div class="col-md-3 form-group form-inline ">' +
-                '<button class="addButton">+</button>' +
-                '<input class="inputNum" id="' + cartProduct.items.barcode + '" type="text">' +
-                '<button class="reduceButton">-</button></div>' +
-                '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode+ '" class="deleteButton">移除</button></div>' +
-                '<div id="'+'button' + cartProduct.items.barcode+ '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount + '元' +
-                '</div></div></div></div>');
+        if(cartProduct.inputCount > 0) {
+            if (judgeCategory(cartProduct.items.category)) {
+                categories.push(cartProduct.items.category);
+                $('#cartList').append('<div class="panel panel-warning"><div class="panel-heading">' +
+                    '<div class="row text-center">' +
+                    '<div class="col-md-2">' + cartProduct.items.category + '</div>' +
+                    '<div class="col-md-2">单价</div>' +
+                    '<div class="col-md-2">单位</div>' +
+                    '<div class="col-md-3">数量</div>' +
+                    '<div class="col-md-2">移出购物车</div>' +
+                    '<div class="col-md-1">小计</div>' +
+                    '</div></div>' +
+                    '<div class="panel-body"id="' + cartProduct.items.category + '">' +
+                    '<div class="row text-center">' +
+                    '<div class="col-md-2 form-group">' + cartProduct.items.name + '</div>' +
+                    '<div class="col-md-2 form-group">' + cartProduct.items.price + '</div>' +
+                    '<div class="col-md-2 form-group">' + cartProduct.items.unit + '</div>' +
+                    '<div class="col-md-3 form-group form-inline ">' +
+                    '<button class="addButton">+</button>' +
+                    '<input class="inputNum" id="' + cartProduct.items.barcode + '" type="text">' +
+                    '<button class="reduceButton">-</button></div>' +
+                    '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode + '" class="deleteButton">移除</button></div>' +
+                    '<div id="' + 'button' + cartProduct.items.barcode + '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount + '元' +
+                    '</div></div></div></div>');
+            }
+            else {
+                $('#' + cartProduct.items.category + '').append(
+                    '<div class="row text-center" id="' + cartProduct.items.category + '">' +
+                    '<div class="col-md-2 form-group">' + cartProduct.items.name + '</div>' +
+                    '<div class="col-md-2 form-group">' + cartProduct.items.price + '</div>' +
+                    '<div class="col-md-2 form-group">' + cartProduct.items.unit + '</div>' +
+                    '<div class="col-md-3 form-group form-inline">' +
+                    '<button class="addButton">+</button>' +
+                    '<input class="inputNum" id="' + cartProduct.items.barcode + '" type="text" value="">' +
+                    '<button class="reduceButton">-</button></div>' +
+                    '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode + '"class="deleteButton">移除</button></div>' +
+                    '<div id="' + 'button' + cartProduct.items.barcode + '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount +
+                    '元</div></div>');
+            }
         }
-        else {
-            $('#'+cartProduct.items.category+'').append(
-                '<div class="row text-center" id="' + cartProduct.items.category + '"></div>'+
-                '<div class="col-md-2 form-group">' + cartProduct.items.name + '</div>' +
-                '<div class="col-md-2 form-group">' + cartProduct.items.price + '</div>' +
-                '<div class="col-md-2 form-group">' + cartProduct.items.unit + '</div>' +
-                '<div class="col-md-3 form-group form-inline">' +
-                '<button class="addButton">+</button>' +
-                '<input class="inputNum" id="' + cartProduct.items.barcode+ '" type="text" value="">' +
-                '<button class="reduceButton">-</button></div>' +
-                '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode+ '"class="deleteButton">移除</button></div>' +
-                '<div id="'+'button' + cartProduct.items.barcode+ '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount +
-                '元</div></div></div></div>');
-              }
         });
         $('#cartItemBottom').append('<p id="total" class="text-center">总计：'+getTotal(cartProduct)+'元</p>'+
             '<p class="text-center"><a class="btn btn-primary btn-lg" role="button" href="pay.html">去结算>></a></p>');
@@ -210,27 +212,24 @@ function getNewMoney(){
            total += cartItems.items.price * cartItems.inputCount;
            $('#total').text(total);
         });
-
 }
-//
-//function deleteButton(id){
-//
-//    var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
-//    var cartSums = JSON.parse(localStorage.getItem('cartSum'));
-//    if(!cartItems){
-//        cartItems = [];
-//    }
-//    console.log('-----------');
-//    for(var i = 0; i < cartItems.length; i++) {
-//        if (id === cartItems[i].items.barcode) {
-//            cartSums = cartSums - cartItems[i].inputCount ;
-//            cartItems[i].inputCount = 0;
-//
-//
-//            $('#'+ id).val( cartItems[i].inputCount);
-//            $('#cartItemSum').text(cartSums);
-//        }
-//    }
-//    localStorage.setItem('cartProduct',JSON.stringify(cartItems));
-//    localStorage.setItem('cartSum',JSON.stringify(cartSums));
-//  }
+
+function deleteButton(id){
+
+    var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
+    var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+    if(!cartItems){
+        cartItems = [];
+    }
+    for(var i = 0; i < cartItems.length; i++) {
+        if (id === cartItems[i].items.barcode) {
+            cartSums = cartSums - cartItems[i].inputCount ;
+            cartItems[i].inputCount = 0;
+
+            $('#'+ id).val( cartItems[i].inputCount);
+            $('#cartItemSum').text(cartSums);
+        }
+    }
+    localStorage.setItem('cartProduct',JSON.stringify(cartItems));
+    localStorage.setItem('cartSum',JSON.stringify(cartSums));
+  }
