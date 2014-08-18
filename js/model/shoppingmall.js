@@ -8,7 +8,7 @@ $(document).ready(function(){
     $('.add').on('click',function(){
 //        console.log($(this)[0].id);
        addCart($(this)[0].id);
-        cartSum++;
+        cartSum += 1;
         localStorage.setItem('cartSum',JSON.stringify(cartSum));
         var cartSums = JSON.parse(localStorage.getItem('cartSum'));
 
@@ -32,4 +32,15 @@ function showAllItemsList(){
     }
 }
 
-
+//
+//showAllItemsList();
+//var cartSum = 0;
+//localStorage.setItem('cartSum',JSON.stringify(cartSum));
+//$('.add').on('click',function(){
+////        console.log($(this)[0].id);
+//    addCart($(this)[0].id);
+//    var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+//    cartSums++;
+//    $('#cartItemSum').text(cartSums);
+//    localStorage.setItem('cartSum',JSON.stringify(cartSums));
+//});

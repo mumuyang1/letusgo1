@@ -1,15 +1,36 @@
 /**
  * Created by liyanzi on 14-8-15.
  */
-
-/**
- * Created by liyanzi on 14-8-15.
- */
 $(document).ready(function(){
 
     var cartSums = JSON.parse(localStorage.getItem('cartSum'));
     $('#cartItemSum').text(cartSums);
     showCartList();
+
+    $('.addButton').on('click',function(){
+        var id = $(this).closest('.form-inline').find('.inputNum')[0].id;
+      //  console.log(id);
+        addButton(id);
+        getNewMoney();
+    });
+
+    $('.reduceButton').on('click',function(){
+        var id = $(this).closest('.form-inline').find('.inputNum')[0].id;
+        reduceButton(id);
+        getNewMoney();
+    });
+
+//    $('.deleteButton').on('click',function(){
+////        console.log( $(this).closest('.form-group').find('.col-md-3').find('.inputNum'));
+////        var id = $(this).closest('.form-group').find('.col-md-3').find('.inputNum')[0];
+//   //     var id = $(this).closest('.form-group').find('.inputNum')[0].id;
+//        var id = $(this).closest('.addButton').closest('.form-group').find('.inputNum')[0].id;
+//        deleteButton(id);
+//        getNewMoney();
+//
+//    });
+
+    getSum();
 });
 
 function addCart(barcode){
@@ -59,37 +80,49 @@ function showCartList(){
     _.forEach(cartProduct, function (cartProduct){
         if (judgeCategory(cartProduct.items.category)) {
             categories.push(cartProduct.items.category);
-            $('#cartList').append('<div class="panel panel-warning">' + '<div class="panel-heading">' +
-                '<div class="row text-center">' + '<div class="col-md-2">'+cartProduct.items.category+
-                '</div>' + '<div class="col-md-2">单价</div>' + '<div class="col-md-2">单位</div>' +
-                '<div class="col-md-3">数量</div>' + '<div class="col-md-2">移出购物车</div>' +
-                '<div class="col-md-1">小计</div>' + '</div>' + '</div>' + '<div class="panel-body">' +
+            $('#cartList').append('<div class="panel panel-warning"><div class="panel-heading">' +
+                '<div class="row text-center">' +
+                '<div class="col-md-2">'+cartProduct.items.category +'</div>' +
+                '<div class="col-md-2">单价</div>' +
+                '<div class="col-md-2">单位</div>' +
+                '<div class="col-md-3">数量</div>' +
+                '<div class="col-md-2">移出购物车</div>' +
+                '<div class="col-md-1">小计</div>' +
+                '</div></div>' +
+                '<div class="panel-body">' +
                 '<div class="row text-center" id="' + cartProduct.items.category + '">' +
-                '<div class="col-md-2">' + cartProduct.items.name + '</div>' + '<div class="col-md-2">' +
-                cartProduct.items.price + '</div>' + '<div class="col-md-2">' + cartProduct.items.unit +
-                '</div>' + '<div class="col-md-3 form-inline form-group">' +
-                '<button>+</button>' + '<input type="text" value="1">' + '<button>-</button>' +
-                '</div>' + '<div class="col-md-2">' + '<button>移除</button>' + '</div>' +
-                '<div class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount + '元' +
-                '</div>' + '</div>' + '</div>' + '</div>');
+                '<div class="col-md-2 form-group">' + cartProduct.items.name + '</div>' +
+                '<div class="col-md-2 form-group">' + cartProduct.items.price + '</div>' +
+                '<div class="col-md-2 form-group">' + cartProduct.items.unit + '</div>' +
+                '<div class="col-md-3 form-group form-inline ">' +
+                '<button class="addButton">+</button>' +
+                '<input class="inputNum" id="' + cartProduct.items.barcode + '" type="text">' +
+                '<button class="reduceButton">-</button></div>' +
+                '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode+ '" class="deleteButton">移除</button></div>' +
+                '<div id="'+'button' + cartProduct.items.barcode+ '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount + '元' +
+                '</div></div></div></div>');
         }
         else {
             $('#'+cartProduct.items.category+'').append(
-                '<div class="row text-center"></div>'+ '<div class="col-md-2">' + cartProduct.items.name +
-                '</div>' + '<div class="col-md-2">' + cartProduct.items.price + '</div>' +
-                '<div class="col-md-2">' + cartProduct.items.unit + '</div>' +
-                '<div class="col-md-3 form-inline form-group">' +
-                '<button>+</button>' + '<input type="text" value="1">' + '<button>-</button>' +
-                '</div>' + '<div class="col-md-2">' + '<button>移除</button>' + '</div>' +
-                '<div class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount +
-                '元' + '</div>' + '</div>' + '</div>' + '</div>');
+                '<div class="row text-center" id="' + cartProduct.items.category + '"></div>'+
+                '<div class="col-md-2 form-group">' + cartProduct.items.name + '</div>' +
+                '<div class="col-md-2 form-group">' + cartProduct.items.price + '</div>' +
+                '<div class="col-md-2 form-group">' + cartProduct.items.unit + '</div>' +
+                '<div class="col-md-3 form-group form-inline">' +
+                '<button class="addButton">+</button>' +
+                '<input class="inputNum" id="' + cartProduct.items.barcode+ '" type="text" value="">' +
+                '<button class="reduceButton">-</button></div>' +
+                '<div class="col-md-2 form-group"><button id="' + cartProduct.items.barcode+ '"class="deleteButton">移除</button></div>' +
+                '<div id="'+'button' + cartProduct.items.barcode+ '" class="col-md-1">' + cartProduct.items.price * cartProduct.inputCount +
+                '元</div></div></div></div>');
               }
         });
-        $('#cartItemBottom').append('<p class="text-center">总计：'+getTotal(cartProduct)+'元</p>'+
-            '<p class="text-center">'+'<a class="btn btn-primary btn-lg" role="button" href="pay.html">去结算>></a></p>');
+        $('#cartItemBottom').append('<p id="total" class="text-center">总计：'+getTotal(cartProduct)+'元</p>'+
+            '<p class="text-center"><a class="btn btn-primary btn-lg" role="button" href="pay.html">去结算>></a></p>');
 }
+
 function judgeCategory(category){
-    console.log(categories.length);
+
     if(categories.length == 0){
         return true;
     }
@@ -114,3 +147,90 @@ function getTotal(cartProduct){
 
     return total;
 }
+
+function getSum() {
+
+    var nums = JSON.parse(localStorage.getItem('cartProduct'));
+    _.forEach(nums, function (nums) {
+       $("#"+nums.items.barcode).val(nums.inputCount);
+//       console.log(nums.items.name+nums.inputCount);
+    });
+
+}
+
+
+function addButton(id){
+//    console.log(id);
+    var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
+    var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+    if(!cartItems){
+        cartItems = [];
+    }
+    for(var i = 0; i < cartItems.length; i++) {
+        if (id === cartItems[i].items.barcode) {
+            cartItems[i].inputCount += 1;
+            cartSums += 1;
+            $('#'+ id).val( cartItems[i].inputCount);
+            $('#cartItemSum').text(cartSums);
+        }
+    }
+    localStorage.setItem('cartProduct',JSON.stringify(cartItems));
+    localStorage.setItem('cartSum',JSON.stringify(cartSums));
+}
+
+
+function reduceButton(id) {
+
+    var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
+    var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+    if (!cartItems) {
+        cartItems = [];
+    }
+    for (var i = 0; i < cartItems.length; i++) {
+        if (id === cartItems[i].items.barcode) {
+
+            if (cartItems[i].inputCount > 1) {
+                cartItems[i].inputCount -= 1;
+                cartSums -= 1;
+                $('#' + id).val(cartItems[i].inputCount);
+                $('#cartItemSum').text(cartSums);
+           }
+        }
+    }
+    localStorage.setItem('cartProduct', JSON.stringify(cartItems));
+    localStorage.setItem('cartSum', JSON.stringify(cartSums));
+}
+
+function getNewMoney(){
+
+    var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
+    var total = 0;
+        _.forEach(cartItems, function(cartItems){
+            $('#'+'button'+cartItems.items.barcode).text(cartItems.items.price * cartItems.inputCount);
+           total += cartItems.items.price * cartItems.inputCount;
+           $('#total').text(total);
+        });
+
+}
+//
+//function deleteButton(id){
+//
+//    var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
+//    var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+//    if(!cartItems){
+//        cartItems = [];
+//    }
+//    console.log('-----------');
+//    for(var i = 0; i < cartItems.length; i++) {
+//        if (id === cartItems[i].items.barcode) {
+//            cartSums = cartSums - cartItems[i].inputCount ;
+//            cartItems[i].inputCount = 0;
+//
+//
+//            $('#'+ id).val( cartItems[i].inputCount);
+//            $('#cartItemSum').text(cartSums);
+//        }
+//    }
+//    localStorage.setItem('cartProduct',JSON.stringify(cartItems));
+//    localStorage.setItem('cartSum',JSON.stringify(cartSums));
+//  }

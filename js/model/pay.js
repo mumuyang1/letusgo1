@@ -5,6 +5,7 @@ $(document).ready(function(){
         var cartSums = JSON.parse(localStorage.getItem('cartSum'));
         $('#cartItemSum').text(cartSums);
         showPayList();
+
 });
 
 function showPayList(){
