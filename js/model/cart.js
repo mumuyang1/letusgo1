@@ -1,6 +1,3 @@
-/**
- * Created by liyanzi on 14-8-15.
- */
 $(document).ready(function(){
 
     var cartSums = JSON.parse(localStorage.getItem('cartSum'));
@@ -9,7 +6,6 @@ $(document).ready(function(){
 
     $('.addButton').on('click',function(){
         var id = $(this).closest('.form-inline').find('.inputNum')[0].id;
-      //  console.log(id);
         addButton(id);
         getNewMoney();
     });
@@ -21,13 +17,9 @@ $(document).ready(function(){
     });
 
     $('.deleteButton').on('click',function(){
-//        console.log($(this)[0].id);
-//        console.log($(this).closest('.row')+"--------------------");
-
         var id = $(this).closest('.row').find('input')[0].id;
         deleteButton(id);
         getNewMoney();
-
     });
 
     getSum();
@@ -120,16 +112,13 @@ function showCartList(){
 
         }
         });
-//        if(cartProduct.length == 0){
-//            $('#cartItemBottom').append('<p class="text-center">购物车里木有东西了！快去商城看看！</p><br>');
-//        }
         $('#cartItemBottom').append('<p id="total" class="text-center">总计：'+getTotal(cartProduct)+'元</p>'+
             '<p class="text-center"><a class="btn btn-primary btn-lg" role="button" href="pay.html">去结算>></a></p>');
 }
 
 function judgeCategory(category){
 
-    if(categories.length == 0){
+    if(categories.length === 0){
         return true;
     }
     else {
@@ -159,14 +148,12 @@ function getSum() {
     var nums = JSON.parse(localStorage.getItem('cartProduct'));
     _.forEach(nums, function (nums) {
        $("#"+nums.items.barcode).val(nums.inputCount);
-//       console.log(nums.items.name+nums.inputCount);
     });
 
 }
 
 
 function addButton(id){
-//    console.log(id);
     var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
     var cartSums = JSON.parse(localStorage.getItem('cartSum'));
     if(!cartItems){
@@ -222,9 +209,11 @@ function deleteButton(id){
 
     var cartItems = JSON.parse(localStorage.getItem('cartProduct'));
     var cartSums = JSON.parse(localStorage.getItem('cartSum'));
+
     if(!cartItems){
         cartItems = [];
     }
+    
     for(var i = 0; i < cartItems.length; i++) {
         if (id === cartItems[i].items.barcode) {
             cartSums = cartSums - cartItems[i].inputCount ;
